@@ -36,18 +36,54 @@
       h1,h2,h3{ font-family:"Sora",sans-serif; line-height:1.15; margin:0; }
       button{ font:inherit; cursor:pointer; }
       input,select,textarea{ font:inherit; color:var(--ink); }
-      .wrap{ max-width:1180px; margin:0 auto; padding:0 20px 64px; }
+      .wrap{ max-width:1240px; margin:0 auto; padding:0 20px 64px; }
+
+      /* ---------- Top nav (desktop bar, iLovePDF-style layout) ---------- */
+      .topnav{ position:sticky; top:0; z-index:50; background:var(--surface); border-bottom:1px solid var(--line); box-shadow:0 1px 0 rgba(18,38,43,.02); }
+      .topnav-in{ max-width:1240px; margin:0 auto; padding:0 20px; height:64px; display:flex; align-items:center; gap:28px; }
+      .brand{ display:flex; align-items:center; gap:10px; background:none; border:none; padding:6px 0; color:var(--ink); flex:none; }
+      .brand svg{ width:36px; height:36px; display:block; }
+      .brand .bname{ font-family:"Sora"; font-weight:800; font-size:20px; letter-spacing:-.01em; white-space:nowrap; }
+      .brand .bname em{ font-style:normal; color:var(--accent); }
+      .navlinks{ display:flex; align-items:center; gap:4px; margin-left:auto; }
+      .navlink{ background:none; border:none; color:var(--ink); font-weight:700; font-size:15px; padding:9px 13px; border-radius:9px; white-space:nowrap; min-height:40px; }
+      .navlink:hover{ background:var(--surface2); color:var(--accent-ink); }
+      .navlink.solid{ background:var(--accent); color:#fff; margin-left:8px; padding:9px 18px; }
+      .navlink.solid:hover{ background:var(--accent-ink); color:#fff; }
+      @media (prefers-color-scheme: dark){ .navlink.solid{ color:#1b1a17; } .navlink.solid:hover{ color:#1b1a17; } }
+      .navdrop{ position:relative; }
+      .dropmenu{ display:none; position:absolute; top:calc(100% + 8px); left:0; min-width:210px; background:var(--surface); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:7px; }
+      .dropmenu.open{ display:block; }
+      .dropmenu button{ display:block; width:100%; text-align:left; background:none; border:none; color:var(--ink); font-weight:600; font-size:14.5px; padding:9px 12px; border-radius:8px; min-height:38px; }
+      .dropmenu button:hover{ background:var(--accent-soft); color:var(--accent-ink); }
+      /* ---------- Nav dropdowns: Convert (2-col) + All Tools mega-menu ---------- */
+      .convertmenu{ width:560px; max-width:calc(100vw - 24px); padding:20px 22px; left:auto; right:0; }
+      .convertmenu.open{ display:grid; grid-template-columns:1fr 1fr; gap:6px 30px; }
+      .megamenu{ width:min(1060px, calc(100vw - 24px)); left:auto; right:0; padding:22px 24px; }
+      .megamenu.open{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px 26px; }
+      .menucol h5{ font-family:"Sora"; font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin:2px 0 10px; }
+      .menucol .menuitem{ display:flex; align-items:center; gap:11px; width:100%; text-align:left; background:none; border:none; color:var(--ink); font-weight:700; font-size:14.5px; padding:7px 9px; border-radius:9px; min-height:40px; }
+      .menucol .menuitem:hover{ background:var(--accent-soft); color:var(--accent-ink); }
+      .menuitem .mic{ width:27px; height:27px; flex:none; display:block; }
+      .menuitem .mic svg{ width:27px; height:27px; display:block; }
+      @media (max-width:900px){ .megamenu{ grid-template-columns:repeat(2,1fr); } .megamenu.open{ grid-template-columns:repeat(2,1fr); } }
+      @media (max-width:560px){
+        .convertmenu.open{ grid-template-columns:1fr; }
+        .megamenu.open{ grid-template-columns:1fr; max-height:72vh; overflow:auto; }
+      }
+      @media (max-width:900px){ .navlinks .navlink.opt{ display:none; } .topnav-in{ gap:14px; } }
+      @media (max-width:480px){ .brand .bname{ font-size:17px; } .navlink.solid{ padding:8px 12px; font-size:14px; } }
 
       /* ---------- Hero ---------- */
-      .hero{ padding:44px 0 8px; max-width:760px; }
-      .hero h1{ font-size:clamp(30px,5.4vw,50px); font-weight:800; letter-spacing:-.02em; }
+      .hero{ padding:52px 0 8px; max-width:840px; margin:0 auto; text-align:center; }
+      .hero h1{ font-size:clamp(30px,5.4vw,52px); font-weight:800; letter-spacing:-.02em; }
       .hero h1 em{ font-style:normal; color:var(--accent); }
-      .hero p{ color:var(--muted); font-size:17px; margin:14px 0 0; max-width:620px; }
-      .searchbar{ margin:26px 0 14px; position:relative; max-width:560px; }
+      .hero p{ color:var(--muted); font-size:17px; margin:14px auto 0; max-width:640px; }
+      .searchbar{ margin:28px auto 14px; position:relative; max-width:560px; text-align:left; }
       .searchbar svg{ position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--muted); pointer-events:none; }
       .searchbar input{ width:100%; padding:12px 16px 12px 44px; border:1.5px solid var(--line); border-radius:12px; background:var(--surface); font-size:16px; outline:none; }
       .searchbar input:focus{ border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft); }
-      .chips{ display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 4px; }
+      .chips{ display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 4px; justify-content:center; }
       .chip{ border:1.5px solid var(--line); background:var(--surface); color:var(--ink); border-radius:999px; padding:7px 15px; font-weight:700; font-size:14px; min-height:36px; }
       .chip:hover{ border-color:var(--accent); }
       .chip.on{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
@@ -66,8 +102,28 @@
       .c-org{ background:var(--blue-soft); color:var(--blue); } .c-opt{ background:var(--green-soft); color:var(--green); }
       .c-topdf{ background:var(--accent-soft); color:var(--accent-ink); } .c-frompdf{ background:var(--amber-soft); color:var(--amber); }
       .c-edit{ background:var(--teal-soft); color:var(--teal); } .c-sec{ background:var(--plum-soft); color:var(--plum); }
-      .noresult{ display:none; padding:34px 0; color:var(--muted); font-size:16px; }
-      footer{ margin-top:56px; border-top:1px solid var(--line); padding-top:20px; color:var(--muted); font-size:14px; display:flex; flex-wrap:wrap; gap:6px 22px; justify-content:space-between; }
+      .noresult{ display:none; padding:34px 0; color:var(--muted); font-size:16px; text-align:center; }
+      @media (min-width:1024px){ .grid{ grid-template-columns:repeat(4,1fr); } }
+      @media (min-width:641px) and (max-width:1023px){ .grid{ grid-template-columns:repeat(3,1fr); } }
+
+      /* ---------- Info section + footer ---------- */
+      .features{ margin-top:64px; border-top:1px solid var(--line); padding-top:44px; }
+      .features h2{ font-size:26px; font-weight:800; text-align:center; letter-spacing:-.015em; }
+      .features .fsub{ color:var(--muted); text-align:center; margin:10px auto 0; max-width:560px; font-size:15.5px; }
+      .featgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:32px; }
+      @media (max-width:760px){ .featgrid{ grid-template-columns:1fr; gap:20px; } }
+      .feat h3{ font-size:17px; font-weight:700; margin-bottom:7px; display:flex; align-items:center; gap:9px; }
+      .feat h3 svg{ color:var(--accent); flex:none; }
+      .feat p{ margin:0; color:var(--muted); font-size:14.5px; line-height:1.55; }
+      .sitefooter{ margin-top:64px; border-top:1px solid var(--line); padding-top:38px; }
+      .footgrid{ display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:30px; }
+      @media (max-width:900px){ .footgrid{ grid-template-columns:1fr 1fr; } }
+      @media (max-width:480px){ .footgrid{ grid-template-columns:1fr; } }
+      .footbrand p{ color:var(--muted); font-size:14px; margin:12px 0 0; max-width:300px; line-height:1.55; }
+      .footcol h4{ font-family:"Sora"; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin:4px 0 12px; }
+      .footlink{ display:block; background:none; border:none; color:var(--ink); font-size:14.5px; font-weight:600; padding:5px 0; text-align:left; min-height:32px; }
+      .footlink:hover{ color:var(--accent-ink); }
+      .footbottom{ margin-top:36px; border-top:1px solid var(--line); padding-top:18px; color:var(--muted); font-size:13.5px; display:flex; flex-wrap:wrap; gap:6px 22px; justify-content:space-between; }
 
       /* ---------- Tool workspace ---------- */
       .hidden{ display:none !important; }
@@ -161,9 +217,80 @@
       .stat{ background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px 16px; font-weight:700; font-size:14px; }
       .stat b{ font-family:"Sora"; font-size:18px; display:block; }
       @media (max-width:560px){ .grid{ grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); } .panel{ padding:16px; } }
+
+      /* ---------- Compress workspace (post-upload layout) ---------- */
+      .compress-workspace{ display:grid; grid-template-columns:minmax(0,1fr) 380px; margin-top:22px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--surface); box-shadow:var(--shadow); min-height:540px; }
+      .cw-main{ position:relative; background:var(--surface2); padding:44px 34px 34px; display:flex; flex-wrap:wrap; gap:20px; align-content:flex-start; justify-content:center; }
+      .cw-card{ position:relative; width:224px; background:var(--surface); border-radius:10px; box-shadow:0 2px 10px rgba(18,38,43,.10),0 10px 28px -14px rgba(18,38,43,.25); padding:30px 20px 14px; text-align:center; }
+      .cw-card .cw-thumb{ min-height:150px; display:grid; place-items:center; }
+      .cw-card img{ width:132px; max-width:100%; height:auto; display:block; margin:0 auto; box-shadow:0 2px 8px rgba(18,38,43,.22); background:#fff; }
+      .cw-card .cw-thumb-fallback{ font-family:"Sora"; font-weight:800; font-size:15px; color:var(--accent-ink); background:var(--accent-soft); border-radius:9px; padding:26px 18px; }
+      .cw-card .cw-fname{ margin-top:20px; font-size:13.5px; color:var(--muted); word-break:break-all; line-height:1.4; }
+      .cw-card .cw-fsize{ font-size:12px; color:var(--muted); margin-top:2px; }
+      .cw-card .cw-remove{ position:absolute; top:8px; right:8px; width:30px; height:30px; min-height:30px; border-radius:50%; border:1px solid var(--line); background:var(--surface); color:var(--ink); font-size:13px; display:grid; place-items:center; padding:0; }
+      .cw-card .cw-remove:hover{ border-color:var(--accent); color:var(--accent-ink); }
+      .cw-add{ position:absolute; top:20px; right:20px; width:54px; height:54px; min-height:54px; border-radius:50%; border:none; background:var(--accent); color:#fff; font-size:29px; line-height:1; display:grid; place-items:center; box-shadow:0 6px 16px -4px rgba(8,145,178,.55); padding:0; z-index:2; }
+      .cw-add:hover{ background:var(--accent-ink); }
+      @media (prefers-color-scheme: dark){ .cw-add{ color:#12262b; } .cw-add:hover{ color:#12262b; } }
+      .cw-badge{ position:absolute; top:-5px; left:-5px; width:23px; height:23px; border-radius:50%; background:var(--ink); color:var(--bg); font-size:12px; font-weight:800; font-family:"Sora"; display:grid; place-items:center; border:2px solid var(--surface2); pointer-events:none; }
+      .cw-side{ display:flex; flex-direction:column; border-left:1px solid var(--line); background:var(--surface); }
+      .cw-side h2{ font-size:20px; font-weight:700; text-align:center; padding:17px 16px; border-bottom:1px solid var(--line); }
+      .cw-levels{ padding:18px; display:flex; flex-direction:column; gap:12px; }
+      .cw-level{ display:flex; gap:13px; align-items:flex-start; border:1.5px solid var(--line); border-radius:10px; padding:16px 17px; cursor:pointer; background:var(--surface); transition:border-color .15s ease; }
+      .cw-level:hover{ border-color:var(--accent); }
+      .cw-level.on{ border-color:var(--ink); }
+      .cw-level input[type=radio]{ width:21px; height:21px; min-height:21px; flex:none; margin:2px 0 0; accent-color:var(--ink); cursor:pointer; }
+      .cw-level strong{ display:block; font-size:15.5px; font-weight:700; line-height:1.3; }
+      .cw-level small{ display:block; color:var(--muted); font-size:13.5px; margin-top:3px; line-height:1.4; }
+      .cw-footer{ margin-top:auto; padding:22px; background:var(--accent-soft); }
+      .cw-go{ width:100%; background:var(--accent); color:#fff; border:none; border-radius:10px; padding:16px 20px; font-weight:800; font-size:19px; font-family:"Sora"; min-height:58px; display:flex; align-items:center; justify-content:center; gap:11px; box-shadow:0 8px 20px -8px rgba(8,145,178,.6); }
+      .cw-go:hover:not(:disabled){ background:var(--accent-ink); }
+      .cw-go:disabled{ opacity:.45; cursor:not-allowed; box-shadow:none; }
+      @media (prefers-color-scheme: dark){ .cw-go{ color:#12262b; } }
+      .cw-go .cw-arrow{ width:26px; height:26px; flex:none; border:2px solid currentColor; border-radius:50%; display:grid; place-items:center; font-size:15px; line-height:1; }
+      #toolView.compress-active .filelist, #toolView.compress-active #addMoreBtn, #toolView.compress-active .actionbar,
+      #toolView.ws-active .filelist, #toolView.ws-active #addMoreBtn, #toolView.ws-active .actionbar{ display:none !important; }
+      /* universal tool workspace: options panel lives in the sidebar */
+      #toolWorkspace .panel{ border:none; box-shadow:none; background:transparent; margin:0; padding:8px 18px 18px; border-radius:0; }
+      #toolWorkspace .opts{ grid-template-columns:1fr; }
+      #wsExtra{ flex:1 1 100%; min-width:0; }
+      #wsExtra:empty{ display:none; }
+      .ws-summary{ margin:0; padding:16px 18px 18px; color:var(--muted); font-size:14.5px; line-height:1.55; }
+      #wsOpts:has(> .panel:not(.hidden)) > #wsSummary{ display:none; }
+      .cw-empty{ flex:1 1 100%; text-align:center; color:var(--muted); font-size:15px; padding:70px 20px; align-self:center; }
+      .cw-moves{ display:flex; gap:6px; justify-content:center; margin-top:10px; }
+      .cw-moves button{ width:32px; height:32px; min-height:32px; border-radius:8px; border:1px solid var(--line); background:var(--surface); color:var(--ink); font-size:14px; display:grid; place-items:center; padding:0; }
+      .cw-moves button:hover{ border-color:var(--accent); color:var(--accent-ink); }
+      @media (max-width:900px){
+        .compress-workspace{ grid-template-columns:1fr; min-height:0; }
+        .cw-main{ min-height:320px; padding:34px 18px 26px; }
+        .cw-side{ border-left:none; border-top:1px solid var(--line); }
+        .cw-card{ width:min(224px,100%); }
+      }
     </style>
   </head>
   <body>
+    <header class="topnav">
+      <div class="topnav-in">
+        <button class="brand js-alltools" aria-label="Vijay Pdf Tools — home">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#0891b2"/><path d="M15 10h11l7 7v21a1.5 1.5 0 0 1-1.5 1.5h-16A1.5 1.5 0 0 1 14 38V11a1 1 0 0 1 1-1Z" fill="#fff" opacity=".96"/><path d="M26 10v7h7" fill="#a5f3fc"/><text x="24" y="32" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="800" fill="#0891b2">PDF</text></svg>
+          <span class="bname">Vijay <em>Pdf</em> Tools</span>
+        </button>
+        <nav class="navlinks" aria-label="Popular tools">
+          <button class="navlink opt" data-open-tool="merge">Merge PDF</button>
+          <button class="navlink opt" data-open-tool="split">Split PDF</button>
+          <button class="navlink opt" data-open-tool="compress">Compress PDF</button>
+          <div class="navdrop">
+            <button class="navlink opt" id="convertBtn" aria-haspopup="true" aria-expanded="false">Convert PDF ▾</button>
+            <div class="dropmenu convertmenu" id="convertMenu"></div>
+          </div>
+          <div class="navdrop">
+            <button class="navlink solid" id="allToolsBtn" aria-haspopup="true" aria-expanded="false">All PDF Tools ▾</button>
+            <div class="dropmenu megamenu" id="allToolsMenu"></div>
+          </div>
+        </nav>
+      </div>
+    </header>
     <div class="wrap">
       <!-- ================= HOME ================= -->
       <main id="homeView">
@@ -178,9 +305,61 @@
         </section>
         <div id="catContainer"></div>
         <p class="noresult" id="noResult">No tool matches that search. Try “merge”, “compress” or “word”.</p>
-        <footer>
-          <span><strong>Vijay Pdf Tools</strong> — all processing happens locally in your browser.</span>
-          <span id="toolCount"></span>
+
+        <section class="features">
+          <h2>Why Vijay Pdf Tools</h2>
+          <p class="fsub">A complete PDF toolkit that runs entirely in your browser — open a tool, drop your file, download the result.</p>
+          <div class="featgrid">
+            <div class="feat">
+              <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Private by design</h3>
+              <p>Every conversion and edit happens on your own device. Your files are never uploaded to a server, so documents stay with you.</p>
+            </div>
+            <div class="feat">
+              <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11L9.5 22 19 10h-6.5Z"/></svg>Fast, free, no sign-up</h3>
+              <p>All 28 tools are free to use as often as you like — no account, no watermark on your files, and no waiting in a queue.</p>
+            </div>
+            <div class="feat">
+              <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="13" height="16" rx="2"/><path d="M16 17h3a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-3"/></svg>Works on any device</h3>
+              <p>Use it on your computer, tablet or phone — the layout adapts, and the tools work the same everywhere.</p>
+            </div>
+          </div>
+        </section>
+
+        <footer class="sitefooter">
+          <div class="footgrid">
+            <div class="footbrand">
+              <span class="bname" style="font-family:'Sora';font-weight:800;font-size:19px;">Vijay <em style="font-style:normal;color:var(--accent);">Pdf</em> Tools</span>
+              <p>Merge, split, compress, convert, edit and protect PDFs — free, unlimited, and processed locally in your browser.</p>
+            </div>
+            <div class="footcol">
+              <h4>Organize &amp; Optimize</h4>
+              <button class="footlink" data-open-tool="merge">Merge PDF</button>
+              <button class="footlink" data-open-tool="split">Split PDF</button>
+              <button class="footlink" data-open-tool="compress">Compress PDF</button>
+              <button class="footlink" data-open-tool="ocr">OCR PDF</button>
+              <button class="footlink" data-open-tool="organize">Organize PDF</button>
+            </div>
+            <div class="footcol">
+              <h4>Convert</h4>
+              <button class="footlink" data-open-tool="jpg2pdf">JPG to PDF</button>
+              <button class="footlink" data-open-tool="pdf2jpg">PDF to JPG</button>
+              <button class="footlink" data-open-tool="word2pdf">Word to PDF</button>
+              <button class="footlink" data-open-tool="pdf2word">PDF to Word</button>
+              <button class="footlink" data-open-tool="pdf2xls">PDF to Excel</button>
+            </div>
+            <div class="footcol">
+              <h4>Edit &amp; Security</h4>
+              <button class="footlink" data-open-tool="rotate">Rotate PDF</button>
+              <button class="footlink" data-open-tool="watermark">Add watermark</button>
+              <button class="footlink" data-open-tool="sign">Sign PDF</button>
+              <button class="footlink" data-open-tool="protect">Protect PDF</button>
+              <button class="footlink" data-open-tool="unlock">Unlock PDF</button>
+            </div>
+          </div>
+          <div class="footbottom">
+            <span>© 2026 Vijay Pdf Tools — all processing happens locally in your browser.</span>
+            <span id="toolCount"></span>
+          </div>
         </footer>
       </main>
 
@@ -203,6 +382,37 @@
 
         <div class="filelist" id="fileList"></div>
         <button class="addmore hidden" id="addMoreBtn">+ Add more files</button>
+
+        <!-- Universal post-upload workspace (all tools) -->
+        <div class="compress-workspace hidden" id="toolWorkspace">
+          <div class="cw-main" id="cwMain">
+            <div id="cwFiles" style="display:contents"></div>
+            <button class="cw-add" id="cwAddBtn" type="button" title="Add more files" aria-label="Add more files">+<span class="cw-badge" id="cwBadge">0</span></button>
+            <div class="cw-empty hidden" id="cwEmpty"></div>
+            <div id="wsExtra"></div>
+          </div>
+          <aside class="cw-side">
+            <h2 id="wsTitle">Compression level</h2>
+            <div class="cw-levels" id="cwLevels">
+              <label class="cw-level" data-level="extreme">
+                <input type="radio" name="cwLevel" value="extreme" />
+                <span><strong>Extreme compression</strong><small>Less quality, high compression</small></span>
+              </label>
+              <label class="cw-level on" data-level="recommended">
+                <input type="radio" name="cwLevel" value="recommended" checked />
+                <span><strong>Recommended compression</strong><small>Good quality, good compression</small></span>
+              </label>
+              <label class="cw-level" data-level="less">
+                <input type="radio" name="cwLevel" value="less" />
+                <span><strong>Less compression</strong><small>High quality, less compression</small></span>
+              </label>
+            </div>
+            <div id="wsOpts"><p class="ws-summary" id="wsSummary"></p></div>
+            <div class="cw-footer">
+              <button class="cw-go" id="cwGoBtn" type="button">Compress PDF <span class="cw-arrow" aria-hidden="true">→</span></button>
+            </div>
+          </aside>
+        </div>
 
         <section class="panel hidden" id="optsPanel">
           <div class="opts" id="optsBox"></div>
@@ -453,16 +663,21 @@
       run: async (ctx)=> imagesToPdf(ctx, { size: segVal("size")||"a4", enhance: optVal("enhance") }) });
 
     /* ================= OPTIMIZE ================= */
-    T({ id:"compress", cat:"opt", name:"Compress PDF", icon:"compress", desc:"Shrink your PDF for easy sharing. Pages are re-rendered as optimized images — pick how small you want to go.", accept:".pdf", goLabel:"Compress PDF",
-      options:[ OPT.seg("level","Compression level",[["extreme","Extreme — smallest"],["recommended","Recommended"],["less","Less — best quality"]],"recommended") ],
+    T({ id:"compress", cat:"opt", name:"Compress PDF", icon:"compress", desc:"Shrink your PDF for easy sharing. Pages are re-rendered as optimized images — pick how small you want to go.", accept:".pdf", multi:true, goLabel:"Compress PDF",
       run: async (ctx)=>{
-        const buf = await fileBuf(ctx.files[0].file);
-        const level = segVal("level")||"recommended";
-        const cfg = { extreme:{s:1.1,q:.45}, recommended:{s:1.6,q:.65}, less:{s:2.1,q:.82} }[level];
-        const bytes = await rasterizePdf(buf, cfg.s, cfg.q, ctx.progress);
-        const before = ctx.files[0].file.size, after = bytes.length;
-        ctx.note = `Size: ${fmtSize(before)} → ${fmtSize(after)} (${Math.max(0,Math.round((1-after/before)*100))}% smaller)`;
-        return [{ name: baseName(ctx.files[0].name)+"_compressed.pdf", blob:new Blob([bytes],{type:"application/pdf"}) }];
+        const levelEl = document.querySelector('input[name="cwLevel"]:checked');
+        const level = levelEl ? levelEl.value : "recommended";
+        const cfg = { extreme:{s:1.1,q:.45}, recommended:{s:1.6,q:.65}, less:{s:2.1,q:.82} }[level] || {s:1.6,q:.65};
+        const results=[]; const notes=[];
+        for(let fi2=0; fi2<ctx.files.length; fi2++){
+          const buf = await fileBuf(ctx.files[fi2].file);
+          const bytes = await rasterizePdf(buf, cfg.s, cfg.q, (f,m)=> ctx.progress((fi2+f)/ctx.files.length, ctx.files.length>1 ? ("File "+(fi2+1)+" of "+ctx.files.length+" — "+m) : m));
+          const before = ctx.files[fi2].file.size, after = bytes.length;
+          notes.push(`${ctx.files[fi2].name}: ${fmtSize(before)} → ${fmtSize(after)} (${Math.max(0,Math.round((1-after/before)*100))}% smaller)`);
+          results.push({ name: baseName(ctx.files[fi2].name)+"_compressed.pdf", blob:new Blob([bytes],{type:"application/pdf"}) });
+        }
+        ctx.note = ctx.files.length===1 ? ("Size: "+notes[0].split(": ").slice(1).join(": ")) : notes.join(" · ");
+        return results;
       }});
     T({ id:"repair", cat:"opt", name:"Repair PDF", icon:"repair", desc:"Recover data from a damaged or corrupted PDF and rebuild it into a clean, working file.", accept:".pdf", goLabel:"Repair PDF",
       run: async (ctx)=>{
@@ -633,7 +848,10 @@
         const wb = XLSX.read(await fileBuf(ctx.files[0].file), { type:"array" });
         const host = document.createElement("div");
         host.style.cssText="position:fixed;left:-10000px;top:0;width:1000px;background:#fff;color:#000;padding:36px;font-family:Arial,sans-serif;font-size:12px;";
-        host.innerHTML = wb.SheetNames.map(n=>`<h2 style="font-size:16px;margin:14px 0 8px">${n}</h2>`+XLSX.utils.sheet_to_html(wb.Sheets[n])).join("");
+        wb.SheetNames.forEach(n=>{
+          const h=document.createElement("h2"); h.style.cssText="font-size:16px;margin:14px 0 8px"; h.textContent=n; host.appendChild(h);
+          const div=document.createElement("div"); div.innerHTML=XLSX.utils.sheet_to_html(wb.Sheets[n]); host.appendChild(div);
+        });
         host.querySelectorAll("table").forEach(t=>{ t.style.borderCollapse="collapse"; t.style.width="100%"; });
         host.querySelectorAll("td,th").forEach(td=>{ td.style.border="1px solid #bbb"; td.style.padding="4px 7px"; });
         document.body.appendChild(host);
@@ -966,9 +1184,29 @@
       $("#dzTitle").textContent = t.noFile ? "No file needed for this tool" : (t.multi? "Select your files" : "Select your file");
       $("#dropzone").style.display = t.noFile? "none":"";
       renderOptions(); renderFiles(); hideProgress(); hideError(); hideResult();
+      if(!state._fromHash) setToolHash(id);
       window.scrollTo({top:0});
     }
-    function closeTool(){ $("#toolView").classList.add("hidden"); $("#homeView").classList.remove("hidden"); window.scrollTo({top:0}); }
+    function closeTool(){ $("#toolView").classList.add("hidden"); $("#homeView").classList.remove("hidden"); if(!state._fromHash) setToolHash(null); window.scrollTo({top:0}); }
+
+    /* ---------- URL hash routing: the open tool lives in the hash (e.g. #compress) ---------- */
+    function setToolHash(id){
+      try{
+        if(id){ if(location.hash === "#"+id) return; history.pushState(null, "", "#"+id); }
+        else { if(!location.hash) return; history.pushState(null, "", window.location.pathname + window.location.search); }
+      }catch(_){ /* history unavailable (sandboxed frame) — the tool still opens normally */ }
+    }
+    function syncFromHash(){
+      const id = location.hash.replace(/^#/, "");
+      const t = TOOLS.find(x=>x.id===id);
+      const toolOpen = !$("#toolView").classList.contains("hidden");
+      state._fromHash = true;
+      if(t){ if(!toolOpen || !state.tool || state.tool.id!==id) openTool(id); }
+      else if(toolOpen) closeTool();
+      state._fromHash = false;
+    }
+    window.addEventListener("hashchange", syncFromHash);
+    window.addEventListener("popstate", syncFromHash);
     $("#backBtn").addEventListener("click", closeTool);
     $("#againBtn").addEventListener("click", ()=>openTool(state.tool.id));
     $("#resetBtn").addEventListener("click", ()=>openTool(state.tool.id));
@@ -1075,7 +1313,12 @@
       const t=state.tool, list=$("#fileList"); list.innerHTML="";
       state.files.forEach((f,i)=>{
         const row=document.createElement("div"); row.className="filerow";
-        row.innerHTML=`<span class="fic">${extOf(f.name)}</span><span class="fmeta"><span class="fname">${f.name}</span><br><span class="fsize">${fmtSize(f.file.size)}</span></span>`;
+        const fic=document.createElement("span"); fic.className="fic"; fic.textContent=extOf(f.name);
+        const fmeta=document.createElement("span"); fmeta.className="fmeta";
+        const fnameEl=document.createElement("span"); fnameEl.className="fname"; fnameEl.textContent=f.name;
+        const fsizeEl=document.createElement("span"); fsizeEl.className="fsize"; fsizeEl.textContent=fmtSize(f.file.size);
+        fmeta.appendChild(fnameEl); fmeta.appendChild(document.createElement("br")); fmeta.appendChild(fsizeEl);
+        row.appendChild(fic); row.appendChild(fmeta);
         if(t.multi && state.files.length>1){
           const up=document.createElement("button"); up.className="iconbtn"; up.title="Move up"; up.textContent="↑";
           up.addEventListener("click", ()=>{ if(i>0){ [state.files[i-1],state.files[i]]=[state.files[i],state.files[i-1]]; renderFiles(); } });
@@ -1090,11 +1333,97 @@
       $("#addMoreBtn").classList.toggle("hidden", !(t.multi && state.files.length>0));
       dz.style.display = (t.noFile || state.files.length)? "none":"";
       if(state.files.length && !t.noFile) dz.style.display="none";
+      renderCompressWorkspace();
     }
     function updateGo(){
       const t=state.tool; if(!t) return;
       $("#goBtn").disabled = !(t.noFile || state.files.length>0);
+      const cwGo=$("#cwGoBtn"); if(cwGo) cwGo.disabled = $("#goBtn").disabled;
     }
+
+    /* ---------- universal post-upload workspace (all tools) ---------- */
+    let cwRenderToken = 0;
+    function renderCompressWorkspace(){
+      const t=state.tool, ws=$("#toolWorkspace"); if(!ws || !t) return;
+      const panel=$("#optsPanel"), extra=$("#extraBox"), wsOpts=$("#wsOpts"), wsExtra=$("#wsExtra");
+      const active = state.files.length>0 || !!t.noFile;
+      ws.classList.toggle("hidden", !active);
+      $("#toolView").classList.toggle("ws-active", active);
+      $("#toolView").classList.toggle("compress-active", active && t.id==="compress");
+      if(active){
+        /* options go to the right sidebar; page thumbnails / stage stay under the file cards */
+        if(panel.parentNode!==wsOpts) wsOpts.appendChild(panel);
+        if(extra.parentNode!==wsExtra) wsExtra.appendChild(extra);
+      } else {
+        const pw=$("#progressWrap");
+        if(panel.parentNode!==pw.parentNode) pw.parentNode.insertBefore(panel, pw);
+        if(extra.parentNode!==panel) panel.appendChild(extra);
+        return;
+      }
+      /* sidebar heading, compress levels, action label */
+      $("#wsTitle").textContent = t.id==="compress" ? "Compression level" : t.name+" options";
+      $("#cwLevels").style.display = t.id==="compress" ? "" : "none";
+      $("#cwGoBtn").innerHTML = `${t.goLabel || "Process"} <span class="cw-arrow" aria-hidden="true">→</span>`;
+      $("#cwAddBtn").style.display = t.noFile ? "none" : "";
+      $("#cwBadge").textContent = state.files.length;
+      const empty=$("#cwEmpty");
+      if(t.noFile && !state.files.length){
+        empty.textContent = "This tool needs no file — set your options on the right, then run it.";
+        empty.classList.remove("hidden");
+      } else empty.classList.add("hidden");
+      const sum=$("#wsSummary");
+      sum.textContent = t.id==="merge"
+        ? "Files merge in card order — use the ↑ ↓ buttons on a card to change the order, then Merge PDFs."
+        : (state.files.length ? state.files.length+" file"+(state.files.length>1?"s":"")+" ready — adjust the options if you like, then tap the button below." : "");
+      /* file cards */
+      const host=$("#cwFiles"); host.innerHTML="";
+      const token = ++cwRenderToken;
+      state.files.forEach((f,i)=>{
+        const card=document.createElement("div"); card.className="cw-card";
+        const thumb=document.createElement("div"); thumb.className="cw-thumb";
+        const fb=document.createElement("span"); fb.className="cw-thumb-fallback"; fb.textContent=extOf(f.name);
+        thumb.appendChild(fb);
+        const nm=document.createElement("div"); nm.className="cw-fname"; nm.textContent=f.name;
+        const sz=document.createElement("div"); sz.className="cw-fsize"; sz.textContent=fmtSize(f.file.size);
+        const rm=document.createElement("button"); rm.className="cw-remove"; rm.type="button"; rm.title="Remove file"; rm.textContent="✕";
+        rm.addEventListener("click", ()=>{ state.files.splice(i,1); state.selected=new Set(); state.orgOrder=null; renderFiles(); if(t.thumbs) buildThumbs(); if(t.stage) buildStage(); updateGo(); });
+        card.appendChild(rm); card.appendChild(thumb); card.appendChild(nm); card.appendChild(sz);
+        if(t.multi && state.files.length>1){
+          const mv=document.createElement("div"); mv.className="cw-moves";
+          const up=document.createElement("button"); up.type="button"; up.title="Move up"; up.textContent="↑";
+          up.addEventListener("click", ()=>{ if(i>0){ [state.files[i-1],state.files[i]]=[state.files[i],state.files[i-1]]; renderFiles(); } });
+          const dn=document.createElement("button"); dn.type="button"; dn.title="Move down"; dn.textContent="↓";
+          dn.addEventListener("click", ()=>{ if(i<state.files.length-1){ [state.files[i+1],state.files[i]]=[state.files[i],state.files[i+1]]; renderFiles(); } });
+          mv.appendChild(up); mv.appendChild(dn); card.appendChild(mv);
+        }
+        host.appendChild(card);
+        /* cover thumbnail: the image itself, or the PDF's real first page */
+        if(f.file.type && f.file.type.startsWith("image/")){
+          const img=document.createElement("img");
+          img.src=URL.createObjectURL(f.file); img.alt=f.name;
+          img.onload=()=> setTimeout(()=>URL.revokeObjectURL(img.src), 4000);
+          thumb.innerHTML=""; thumb.appendChild(img);
+        } else if(/\.pdf$/i.test(f.name) || f.file.type==="application/pdf"){
+          (async ()=>{
+            try{
+              const doc = await pdfjsDoc(await fileBuf(f.file));
+              const { canvas } = await renderPageToCanvas(doc, 1, .5);
+              if(token!==cwRenderToken || !card.isConnected) return;
+              const img=document.createElement("img");
+              img.src=canvas.toDataURL("image/jpeg",.78);
+              img.alt="First page of "+f.name;
+              thumb.innerHTML=""; thumb.appendChild(img);
+            }catch(_){ /* keep the file-type fallback tile */ }
+          })();
+        }
+      });
+      updateGo();
+    }
+    $("#cwAddBtn").addEventListener("click", ()=>fi.click());
+    $("#cwGoBtn").addEventListener("click", ()=>{ const g=$("#goBtn"); if(!g.disabled) g.click(); });
+    $$('input[name="cwLevel"]').forEach(r=> r.addEventListener("change", ()=>{
+      $$(".cw-level").forEach(l=> l.classList.toggle("on", l.dataset.level===r.value));
+    }));
 
     /* ---------- thumbnails ---------- */
     async function buildThumbs(){
@@ -1294,7 +1623,7 @@
           const totalSize = results.reduce((s,r)=>s+r.blob.size,0);
           info.textContent = (ctx.note? ctx.note+" " : "") + results.length+" file(s) · "+fmtSize(totalSize)+" total. Tap download to save.";
           const dl=document.createElement("button"); dl.className="dlbtn";
-          dl.innerHTML = results.length===1 ? "⬇ Download "+results[0].name : "⬇ Download all (ZIP)";
+          dl.textContent = results.length===1 ? "⬇ Download "+results[0].name : "⬇ Download all (ZIP)";
           dl.addEventListener("click", ()=> saveResults(results, baseName(state.tool.id)+"-files.zip"));
           btns.appendChild(dl);
           if(results.length>1){
@@ -1311,7 +1640,47 @@
       }
     });
 
+    /* ---------- nav dropdowns (built from TOOLS, so only real tools appear, each with its card logo) ---------- */
+    function menuItem(t){
+      const b=document.createElement("button"); b.className="menuitem"; b.dataset.openTool=t.id;
+      b.innerHTML=`<span class="mic">${ICONS[t.icon]}</span><span>${t.name}</span>`;
+      return b;
+    }
+    function menuCol(cid, head){
+      const col=document.createElement("div"); col.className="menucol";
+      col.innerHTML=`<h5>${head}</h5>`;
+      TOOLS.filter(t=>t.cat===cid).forEach(t=>col.appendChild(menuItem(t)));
+      return col;
+    }
+    function buildNavMenus(){
+      const cm=$("#convertMenu"); cm.innerHTML="";
+      cm.appendChild(menuCol("topdf","Convert to PDF"));
+      cm.appendChild(menuCol("frompdf","Convert from PDF"));
+      const mm=$("#allToolsMenu"); mm.innerHTML="";
+      ["org","opt","topdf","frompdf","edit","sec"].forEach(cid=> mm.appendChild(menuCol(cid, catOf(cid).name)));
+    }
+    buildNavMenus();
+
+    /* ---------- top nav / footer wiring ---------- */
+    const cMenu = $("#convertMenu"), cBtn = $("#convertBtn");
+    const aMenu = $("#allToolsMenu"), aBtn = $("#allToolsBtn");
+    function closeConvert(){ cMenu.classList.remove("open"); cBtn.setAttribute("aria-expanded","false"); }
+    function closeAllMenu(){ aMenu.classList.remove("open"); aBtn.setAttribute("aria-expanded","false"); }
+    function closeMenus(){ closeConvert(); closeAllMenu(); }
+    cBtn.addEventListener("click", e=>{ e.stopPropagation(); closeAllMenu(); const open = cMenu.classList.toggle("open"); cBtn.setAttribute("aria-expanded", String(open)); });
+    aBtn.addEventListener("click", e=>{ e.stopPropagation(); closeConvert(); const open = aMenu.classList.toggle("open"); aBtn.setAttribute("aria-expanded", String(open)); });
+    document.addEventListener("click", e=>{ if(!e.target.closest(".navdrop")) closeMenus(); });
+    $$("[data-open-tool]").forEach(b=> b.addEventListener("click", ()=>{ closeMenus(); openTool(b.dataset.openTool); }));
+    $$(".js-alltools").forEach(b=> b.addEventListener("click", ()=>{
+      closeMenus(); closeTool();
+      $("#searchInput").value="";
+      $$(".chip").forEach((x,i)=> x.classList.toggle("on", i===0));
+      applyFilter();
+      const el = $("#catContainer"); if(el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 84, behavior:"smooth" });
+    }));
+
     renderHome();
+    syncFromHash();
     </script>
 </body>
 </html>
